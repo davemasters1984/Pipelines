@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        bat 'echo "Test"'
         powershell(script: 'Write-Host "NuGet packages restored"', label: 'NuGet Restor')
         powershell(script: 'Write-Host "Build Complete""', label: 'Build')
       }
