@@ -59,6 +59,9 @@ echo "Performance tests complete"'''
       input {
         message "Is the release candidate approved for production?"
       }
+      steps{
+        sh '''echo "Deployment approved"'''
+      }
     }
     stage('Deploy to Prod') {
       steps {
