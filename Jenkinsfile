@@ -55,6 +55,11 @@ echo "Performance tests complete"'''
         }
       }
     }
+    stage('Approve'){
+      input {
+        message "Is the release candidate approved for production?"
+      }
+    }
     stage('Deploy to Prod') {
       steps {
         sh '''echo "Deploying to dormant production environment"
