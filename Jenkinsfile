@@ -39,12 +39,31 @@ echo "Deployment complete"
     }
     stage('Acceptance Tests') {
       parallel {
-        stage('Acceptance Tests') {
+        stage('Automated UI Tests') {
+          parallel{
+            stage('Aquisitions Tests'){
           steps {
             sh '''echo "Executing automated acceptance tests"
 sleep "5"
 echo "Acceptance tests pass"'''
           }
+            }
+            stage('Partner & Rewards Tests'){
+          steps {
+            sh '''echo "Executing automated acceptance tests"
+sleep "5"
+echo "Acceptance tests pass"'''
+          }
+            }    
+            stage('Online Claims Tests'){
+          steps {
+            sh '''echo "Executing automated acceptance tests"
+sleep "5"
+echo "Acceptance tests pass"'''
+          }
+            }                      
+          }
+
         }
         stage('Performance Tests') {
           steps {
