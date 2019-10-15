@@ -3,14 +3,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'echo "Test"'
-        powershell(script: 'Write-Host "NuGet packages restored"', label: 'NuGet Restor')
-        powershell(script: 'Write-Host "Build Complete""', label: 'Build')
+        sh 'echo "Restoring NuGet Packages"'
       }
     }
     stage('Unit Test') {
       steps {
-        powershell(script: 'Write-Host "Unit tests pass"', label: 'Unit tests')
+        sh 'echo "Executing unit tests"'
       }
     }
   }
