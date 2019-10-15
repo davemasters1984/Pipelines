@@ -39,18 +39,32 @@ echo "Deployment complete"
     }
     stage('Acceptance Tests') {
       parallel {
-        stage('Acceptance Tests') {
+        stage('Aquisition UI Tests') {
           steps {
-            sh '''echo "Executing automated acceptance tests"
+            sh '''echo "Executing Acquisition automated UI tests"
 sleep "5"
 echo "Acceptance tests pass"'''
+          }
+        }
+        stage('Partner & Rewards UI Tests') {
+          steps {
+            sh '''echo "Executing Partner & Rewards automated UI tests"
+sleep 5
+echo "Tests complete"'''
+          }
+        }
+        stage('Online Claims UI Tests') {
+          steps {
+            sh '''echo "Executing Online Claims tests"
+sleep 5
+echo "Tests complete"'''
           }
         }
         stage('Performance Tests') {
           steps {
             sh '''echo "Executing performance tests"
-sleep 5
-echo "Performance tests complete"'''
+sleep 10 
+echo "Tests complete"'''
           }
         }
       }
@@ -62,14 +76,14 @@ sleep 5
 echo "Production deployment complete"'''
       }
     }
-    stage('Approve'){
+    stage('Approve') {
       input {
-        message "Is the release candidate approved for production?"
+        message 'Is the release candidate approved for production?'
       }
-      steps{
-        sh '''echo "Deployment approved"'''
+      steps {
+        sh 'echo "Deployment approved"'
       }
-    }    
+    }
     stage('Switch DNS for go-live') {
       steps {
         sh '''echo "Swapping DNS for production"
