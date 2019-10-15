@@ -29,7 +29,7 @@ echo "Code Analysis Passed"'''
         }
       }
     }
-    stage('Deploy') {
+    stage('Deploy to Staging') {
       steps {
         sh '''echo "Deploying to test environment"
 sleep 5
@@ -55,14 +55,6 @@ echo "Performance tests complete"'''
         }
       }
     }
-    stage('Approve'){
-      input {
-        message "Is the release candidate approved for production?"
-      }
-      steps{
-        sh '''echo "Deployment approved"'''
-      }
-    }
     stage('Deploy to Prod') {
       steps {
         sh '''echo "Deploying to dormant production environment"
@@ -70,7 +62,15 @@ sleep 5
 echo "Production deployment complete"'''
       }
     }
-    stage('Go Live') {
+    stage('Approve'){
+      input {
+        message "Is the release candidate approved for production?"
+      }
+      steps{
+        sh '''echo "Deployment approved"'''
+      }
+    }    
+    stage('Switch DNS for go-live') {
       steps {
         sh '''echo "Swapping DNS for production"
 sleep 2
